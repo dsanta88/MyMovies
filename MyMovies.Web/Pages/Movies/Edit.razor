@@ -1,0 +1,24 @@
+﻿@page "/movies/edit/{id:int}"
+
+<FormMovie movie="movie" onValidSubmit="EditMovie"></FormMovie>
+
+@code {
+    [Parameter] public int id { get; set; }
+    private Movie movie = new Movie();
+
+
+    protected override void OnInitialized()
+    {
+        movie = new Movie()
+        {
+            Id = id,
+            Title = "Mi Pelicula"
+        };
+    }
+
+    void EditMovie()
+    {
+        Console.WriteLine("Editando Pelicula");
+    }
+}
+

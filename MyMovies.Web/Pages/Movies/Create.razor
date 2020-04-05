@@ -1,0 +1,13 @@
+﻿@page "/movies/create"
+
+<FormMovie movie="movie" onValidSubmit="CrearMovie"></FormMovie>
+
+@code {
+    private Movie movie = new Movie();
+
+
+    void CrearMovie()
+    {
+        Console.WriteLine("Crer Pelicula");
+    }
+}
