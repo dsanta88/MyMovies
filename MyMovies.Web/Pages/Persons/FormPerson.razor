@@ -6,7 +6,7 @@
         <label>Nombre:</label>
         <div>
             <InputText class="form-control" @bind-Value="@person.Name"></InputText>
-            <ValidationMessage For="@(()=>person.Name)"></ValidationMessage>
+            <ValidationMessage For="@(() => person.Name)"></ValidationMessage>
         </div>
     </div>
 
@@ -14,7 +14,7 @@
         <label>Nombre:</label>
         <div>
             <InputDate class="form-control" @bind-Value="@person.DateBirth"></InputDate>
-            <ValidationMessage For="@(()=>person.DateBirth)"></ValidationMessage>
+            <ValidationMessage For="@(() => person.DateBirth)"></ValidationMessage>
         </div>
     </div>
 
@@ -22,15 +22,38 @@
         <label>Bibliografia:</label>
         <div>
             <InputText class="form-control" @bind-Value="@person.Bibliography"></InputText>
-            <ValidationMessage For="@(()=>person.Bibliography)"></ValidationMessage>
+            <ValidationMessage For="@(() => person.Bibliography)"></ValidationMessage>
         </div>
     </div>
+
+    <div class="form-group">
+        <div>
+            <InputImg label="Foto" imageSelected="ImageSelected"  imageTemporal=""></InputImg>
+        </div>
+    </div>
+
 
     <button class="btn btn-success" type="submit">Guardar Cambios</button>
 
 </EditForm>
 
 @code {
-        [Parameter] public Person person {get;set;}
-        [Parameter] public EventCallback onInvalidSubmit {get;set;}
+    [Parameter] public Person person { get; set; }
+    [Parameter] public EventCallback onInvalidSubmit { get; set; }
+    private string imagenTemporal;
+
+    protected override void  OnInitialized()
+    {
+        if(!string.IsNullOrWhiteSpace(person.Photo))
+        {
+            imagenTemporal = person.Photo;
+            person.Photo = null;
+        }
+    }
+
+
+    private void ImageSelected(string imagenBase64)
+    {
+        person.Photo = imagenBase64;
+    }
 }

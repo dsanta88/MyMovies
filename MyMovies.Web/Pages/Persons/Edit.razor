@@ -1,0 +1,27 @@
+﻿@page "/persons/edit/{id:int}";
+
+
+<h3>Create</h3>
+<FormPerson person="person" onInvalidSubmit="EditarPerson">
+
+</FormPerson>
+
+@code {
+    [Parameter] public int id { get; set; }
+    private Person person = new Person();
+
+    protected override void OnInitialized()
+    {
+        person = new Person()
+        {
+            Id = 1,
+            Name = "David Fernando",
+            DateBirth = DateTime.Today
+        };
+    }
+
+    public void EditarPerson()
+    {
+        Console.WriteLine("Editando la persona.");
+    }
+}
