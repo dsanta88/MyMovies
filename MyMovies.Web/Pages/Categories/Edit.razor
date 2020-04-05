@@ -1,0 +1,25 @@
+﻿@page "/categories/edit/{id:int}"
+
+<h3>EditarGenero</h3>
+<FormCategory onValidSubmit="EditCategory" category="category">
+</FormCategory>
+    @code {
+
+        [Parameter] public int id { get; set; }
+        private Category category;
+
+        protected override void OnInitialized()
+        {
+            category = new Category()
+            {
+                Id = id,
+                Name = "Comedia"
+            };
+        }
+
+
+        private void EditCategory()
+        {
+            Console.WriteLine("Editando Pelicula.");
+        }
+    }

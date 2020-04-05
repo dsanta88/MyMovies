@@ -1,0 +1,16 @@
+﻿@page "/categories/create"
+
+
+<h3>Crear Genero</h3>
+<FormCategory onValidSubmit="CreateCategory" category="category">
+
+</FormCategory>
+@code {
+    private Category category = new Category();
+
+
+    private void CreateCategory()
+    {
+        Console.WriteLine($"Ejecutando metodo crear. Category: {category.Name}");
+    }
+}
