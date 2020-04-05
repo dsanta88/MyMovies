@@ -1,0 +1,36 @@
+﻿<h3>FormPerson</h3>
+
+<EditForm Model="person" OnInvalidSubmit="onInvalidSubmit">
+    <DataAnnotationsValidator />
+    <div class="form-group">
+        <label>Nombre:</label>
+        <div>
+            <InputText class="form-control" @bind-Value="@person.Name"></InputText>
+            <ValidationMessage For="@(()=>person.Name)"></ValidationMessage>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Nombre:</label>
+        <div>
+            <InputDate class="form-control" @bind-Value="@person.DateBirth"></InputDate>
+            <ValidationMessage For="@(()=>person.DateBirth)"></ValidationMessage>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Bibliografia:</label>
+        <div>
+            <InputText class="form-control" @bind-Value="@person.Bibliography"></InputText>
+            <ValidationMessage For="@(()=>person.Bibliography)"></ValidationMessage>
+        </div>
+    </div>
+
+    <button class="btn btn-success" type="submit">Guardar Cambios</button>
+
+</EditForm>
+
+@code {
+        [Parameter] public Person person {get;set;}
+        [Parameter] public EventCallback onInvalidSubmit {get;set;}
+}

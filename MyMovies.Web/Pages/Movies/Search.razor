@@ -5,33 +5,82 @@
     <div class="form-inline">
         <div class="form-group mb-2">
              <label for="titulo" class="sr-only">Titulo</label>
-             <input @bind-value="titulo" @bind-value:event="oninput"
-                    @onkeypress="@((KeyboardEventArgs e)=>TituloKeyPress(e))"
+             <input @bind-value="title" @bind-value:event="oninput"
+                    @onkeypress="@((KeyboardEventArgs e) => TituloKeyPress(e))"
                     type="text" class="form-control" id="titulo" placeholder="Título Película"
                     />
         </div>
 
         <div class="form-group mx-sm-3 mb-2">
-            <select class="form-control" @bind="generoSeleccionado">
+            <select class="form-control" @bind="categoryselected">
                 <option value="0">--Seleccione un Genero--</option>
                 @foreach (var item in categories)
                 {
                     <option value="@item.Id">@item.Name</option>
                 }
             </select>
+
+            <div class="form-group mx-sm-3 mb-2">
+                <input type="checkbox" class="form-check-input" id="premieres" @bind="futurePremieres" />
+                <label class="form-check-label" for="premieres">
+                    Futuros Estrenos
+                </label>
+            </div>
+
+            <div class="form-group mx-sm-3 mb-2">
+                <input type="checkbox" class="form-check-input" id="theater" @bind="inTheater" />
+                <label class="form-check-label" for="theater">
+                    En Cartelera
+                </label>
+            </div>
+
+            <div class="form-group mx-sm-3 mb-2">
+                <input type="checkbox" class="form-check-input" id="ranking" @bind="ranking" />
+                <label class="form-check-label" for="theater">
+                    Ranking
+                </label>
+            </div>
+
+            <button type="button" class="btn btn-primary mb-2 mx-sm-3" @onclick="LoadNewMovies">Buscar</button>
+            <button type="button" class="btn btn-primary mb-2 mx-sm-3" @onclick="ClearOnClick">Limpiar</button>
         </div>
     </div>
-
+    <ListMovies> </ListMovies>
     @code {
-        string titulo = "";
-        string generoSeleccionado = "";
-        private List<Category> categories = new List<Category>();
 
-        private void TituloKeyPress(KeyboardEventArgs e)
-        {
-            if(e.Key=="Enter")
+          
+            string title = "";
+            string categoryselected = "";
+            private bool futurePremieres = false;
+            private bool inTheater = false;
+            private bool ranking = false;
+
+            private List<Category> categories = new List<Category>();
+
+            private void TituloKeyPress(KeyboardEventArgs e)
             {
-
+                if (e.Key == "Enter")
+                {
+                    LoadNewMovies();
+                }
             }
-        }
+
+            private void LoadNewMovies()
+            {
+                Console.WriteLine($"title:{title}");
+                Console.WriteLine($"categoryselected:{categoryselected}");
+                Console.WriteLine($"inTheater:{inTheater}");
+                Console.WriteLine($"futurePremieres:{futurePremieres}");
+                Console.WriteLine($"ranking:{ranking}");
+            }
+
+            private void ClearOnClick()
+            {
+              title = "";
+              categoryselected = "";
+              futurePremieres = false;
+              inTheater = false;
+              ranking = false;
+            }
+
     }
