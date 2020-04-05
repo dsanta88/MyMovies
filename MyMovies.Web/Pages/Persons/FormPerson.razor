@@ -28,8 +28,19 @@
 
     <div class="form-group">
         <div>
-            <InputImg label="Foto" imageSelected="ImageSelected"  imageTemporal=""></InputImg>
+            <InputImg label="Foto" imageSelected="ImageSelected" imageTemporal="">
+
+            </InputImg>
         </div>
+    </div>
+
+
+    <div class="form-group  form-markdown">
+      <InputMarkdown @bind-Value="@person.Bibliography"
+                          For="@(()=>person.Bibliography)"
+                          label="Bibliografia">
+
+      </InputMarkdown>
     </div>
 
 

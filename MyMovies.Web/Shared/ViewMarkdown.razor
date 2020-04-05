@@ -1,0 +1,30 @@
+﻿@using Markdig
+
+
+@if(string.IsNullOrEmpty(contentHtml))
+{
+    if(templateLoad!=null)
+    {
+        @templateLoad
+    }
+}
+else
+{
+  @((MarkupString)contentHtml)
+}
+
+@code {
+    [Parameter] public  string contentMarkdown { get; set; }
+    [Parameter] public  RenderFragment templateLoad { get; set; }
+    private string contentHtml;
+
+    protected override void OnParametersSet()
+    {
+        if(contentMarkdown!=null)
+        {
+
+            contentHtml = Markdown.ToHtml(contentMarkdown);
+        }
+    }
+
+}
